@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MS_Lines"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="350" KeyDown="OnKeyDownHandler">
+        Title="MainWindow" Height="700" Width="700" KeyDown="OnKeyDownHandler">
     <Canvas Name="Canvas">
         <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <!-- needed this dockpanel so the canvas gets a decent width and height that matches the window. -->

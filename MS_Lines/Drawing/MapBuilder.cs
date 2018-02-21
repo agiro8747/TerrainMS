@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using Algo.Properties;
 using ObjParser;
@@ -15,12 +16,50 @@ namespace MS_Lines.Drawing
         //determined by the given window size.
         public static int cellSize;
 
+        public void Init(double objSizeX)
+        {
+            cellSize = (int)(mCanvas.ActualWidth / objSizeX);
+        }
+
         public MapBuilder(Canvas c, double windowWidth)
         {
             mCanvas = c;
         }
 
-        public void GenerateMap(Obj obj)
+        public void MapStep(Face f, otf_Obj obj, double treshold)
+        {
+            /*
+                 * but first we have to reorder the vertices for our grid cell.
+                 * that way the grid cell can figure out 
+                 */
+            List<Vertex> faceVertices = linkVertices(obj, f);
+
+            var cell = new GridCell(
+                new IntPoint[]
+                {
+                        BlenderCoordToWpfPixel(faceVertices.OrderByDescending(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault()),
+                        BlenderCoordToWpfPixel(faceVertices.OrderByDescending(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault()),
+                        BlenderCoordToWpfPixel(faceVertices.OrderBy(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault()),
+                        BlenderCoordToWpfPixel(faceVertices.OrderBy(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault())
+                }, new double[]
+                {
+
+                        faceVertices.OrderByDescending(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault().Z,
+                        faceVertices.OrderByDescending(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault().Z,
+                        faceVertices.OrderBy(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault().Z,
+                        faceVertices.OrderBy(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault().Z
+                }
+                );
+
+            //now that we have the gridCell, go ahead and draw it.
+            //Drawer.DrawGridCell(mCanvas, cell);
+            //for now it's hardcoded.
+            //later on maybe more contours? like 5 between the lowest and highest height data?
+            Application.Current.Dispatcher.Invoke(new Action(() => { Drawer.DrawLines(mCanvas, cell.GetLineEndings(treshold)); }));
+            
+        }
+
+        public void GenerateMap(Obj obj, double treshold)
         {
             /*
              * first of all we have to stretch the obj file to fill the viewport. 
@@ -31,36 +70,9 @@ namespace MS_Lines.Drawing
              * (mesh exported with pivot on origo).
              */
 
-            cellSize = (int)(mCanvas.ActualWidth / obj.Size.XSize);
-
             foreach (Face _face in obj.FaceList)
             {
-                /*
-                 * but first we have to reorder the vertices for our grid cell.
-                 * that way the grid cell can figure out 
-                 */
-                List<Vertex> faceVertices = linkVertices(obj, _face);
-
-                var cell = new GridCell(
-                    new IntPoint[]
-                    {
-                        BlenderCoordToWpfPixel(faceVertices.OrderByDescending(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault()),
-                        BlenderCoordToWpfPixel(faceVertices.OrderByDescending(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault()),
-                        BlenderCoordToWpfPixel(faceVertices.OrderBy(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault()),
-                        BlenderCoordToWpfPixel(faceVertices.OrderBy(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault())
-                    }, new double[]
-                    {
-
-                        faceVertices.OrderByDescending(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault().Z,
-                        faceVertices.OrderByDescending(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault().Z,
-                        faceVertices.OrderBy(x => x.Y).Take(2).OrderByDescending(y => y.X).FirstOrDefault().Z,
-                        faceVertices.OrderBy(x => x.Y).Take(2).OrderBy(y => y.X).FirstOrDefault().Z
-                    }
-                    );
-
-                //now that we have the gridCell, go ahead and draw it.
-                //Drawer.DrawGridCell(mCanvas, cell);
-                Drawer.DrawLines(mCanvas, cell.GetLineEndings(0.01));
+                MapStep(_face, obj, treshold);
             }
         }
 
@@ -76,13 +88,13 @@ namespace MS_Lines.Drawing
                 (int)(mCanvas.ActualHeight / 2) + (int)(blenderCoord.Y * cellSize));
         }
 
-        private List<Vertex> linkVertices(Obj obj, Face face)
+        private List<Vertex> linkVertices(otf_Obj obj, Face face)
         {
             //getting the actual vertex data from a face using its vertex indexes. 
             var vList = new List<Vertex>();
             for (int i = 0; i < face.VertexIndexList.Length; i++)
             {
-                vList.Add(obj.VertexList[face.VertexIndexList[i] - 1]);
+                vList.Add(obj.VertexList[face.VertexIndexList[i]]);
             }
             return vList;
         }
