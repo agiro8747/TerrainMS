@@ -88,13 +88,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Downloads\ObjParser-master\ObjParser\ObjParser.csproj">
-      <Project>{04aa9b94-b460-4e73-baf0-0154494bfe82}</Project>
-      <Name>ObjParser</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Algo\Algo.csproj">
       <Project>{eba96e7a-24f8-43f4-af04-16df6422220e}</Project>
       <Name>Algo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjParser\ObjParser.csproj">
+      <Project>{04aa9b94-b460-4e73-baf0-0154494bfe82}</Project>
+      <Name>ObjParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,12 @@
+C:\Users\ragos\Downloads\ObjParser-master\ObjParser\bin\Debug\ObjParser.dll
+C:\Users\ragos\Downloads\ObjParser-master\ObjParser\bin\Debug\ObjParser.pdb
+C:\Users\ragos\Downloads\ObjParser-master\ObjParser\obj\Debug\ObjParser.csprojResolveAssemblyReference.cache
+C:\Users\ragos\Downloads\ObjParser-master\ObjParser\obj\Debug\ObjParser.csproj.CoreCompileInputs.cache
+C:\Users\ragos\Downloads\ObjParser-master\ObjParser\obj\Debug\ObjParser.dll
+C:\Users\ragos\Downloads\ObjParser-master\ObjParser\obj\Debug\ObjParser.pdb
+C:\Users\ragos\RiderProjects\Marching Squares\ObjParser\bin\Debug\ObjParser.dll
+C:\Users\ragos\RiderProjects\Marching Squares\ObjParser\bin\Debug\ObjParser.pdb
+C:\Users\ragos\RiderProjects\Marching Squares\ObjParser\obj\Debug\ObjParser.csprojResolveAssemblyReference.cache
+C:\Users\ragos\RiderProjects\Marching Squares\ObjParser\obj\Debug\ObjParser.csproj.CoreCompileInputs.cache
+C:\Users\ragos\RiderProjects\Marching Squares\ObjParser\obj\Debug\ObjParser.dll
+C:\Users\ragos\RiderProjects\Marching Squares\ObjParser\obj\Debug\ObjParser.pdb

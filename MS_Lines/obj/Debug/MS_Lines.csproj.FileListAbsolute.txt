@@ -1,6 +1,10 @@
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\MS_Lines.exe.config
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\MS_Lines.exe
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\MS_Lines.pdb
+C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\Algo.dll
+C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\ObjParser.dll
+C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\Algo.pdb
+C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\ObjParser.pdb
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.csprojResolveAssemblyReference.cache
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MainWindow.g.cs
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\App.g.cs
@@ -13,7 +17,3 @@ C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.csproj
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.csproj.CoreCompileInputs.cache
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.exe
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.pdb
-C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\Algo.dll
-C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\Algo.pdb
-C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\ObjParser.dll
-C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\bin\Debug\ObjParser.pdb

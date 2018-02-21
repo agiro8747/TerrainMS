@@ -1,6 +1,5 @@
 C:\Users\ragos\RiderProjects\Marching Squares\Algo\bin\Debug\Algo.dll
 C:\Users\ragos\RiderProjects\Marching Squares\Algo\bin\Debug\Algo.pdb
-C:\Users\ragos\RiderProjects\Marching Squares\Algo\obj\Debug\Algo.csprojResolveAssemblyReference.cache
 C:\Users\ragos\RiderProjects\Marching Squares\Algo\obj\Debug\Algo.csproj.CoreCompileInputs.cache
 C:\Users\ragos\RiderProjects\Marching Squares\Algo\obj\Debug\Algo.dll
 C:\Users\ragos\RiderProjects\Marching Squares\Algo\obj\Debug\Algo.pdb
