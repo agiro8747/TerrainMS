@@ -42,22 +42,15 @@ namespace MS_Lines
                 //this ain's parallel just yet of course.
                 //da is like the stuff draws right in front of u
 
-                Task t2 = new Task(() =>
-                {
-                    obj.OnTheFlyProcess(filename, 0.03);
-                }, TaskCreationOptions.LongRunning);
 
-                Task t = new Task(() =>
-                {
-                    obj.OnTheFlyProcess(filename, 0.01);
-                    
-                },TaskCreationOptions.LongRunning);
+                //Task t = new Task(() =>
+                //{
+                //    obj.OnTheFlyProcess(filename, 0.01);
 
-                t.ContinueWith((_t2) =>
-                {
-                    t2.Start();
-                });
-                t.Start();
+                //},TaskCreationOptions.LongRunning);
+
+                //t.Start();
+                obj.OnTheFlyProcess(filename, 0.01);
 
                 
                 //da is like u wait for 4 mins and da image pops up

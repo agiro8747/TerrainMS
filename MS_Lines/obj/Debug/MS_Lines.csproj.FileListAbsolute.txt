@@ -17,3 +17,4 @@ C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.csproj
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.csproj.CoreCompileInputs.cache
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.exe
 C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.pdb
+C:\Users\ragos\RiderProjects\Marching Squares\MS_Lines\obj\Debug\MS_Lines.csproj.CopyComplete

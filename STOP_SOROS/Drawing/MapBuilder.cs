@@ -32,7 +32,7 @@ namespace MS_Lines.Drawing
                  * but first we have to reorder the vertices for our grid cell.
                  * that way the grid cell can figure out 
                  */
-            List<Vertex> faceVertices = LinkVertices(obj, f);
+            List<Vertex> faceVertices = linkVertices(obj, f);
 
             var cell = new GridCell(
                 new IntPoint[]
@@ -88,7 +88,7 @@ namespace MS_Lines.Drawing
                 (int)(mCanvas.ActualHeight / 2) + (int)(blenderCoord.Y * cellSize));
         }
 
-        private List<Vertex> LinkVertices(otf_Obj obj, Face face)
+        private List<Vertex> linkVertices(otf_Obj obj, Face face)
         {
             //getting the actual vertex data from a face using its vertex indexes. 
             var vList = new List<Vertex>();
