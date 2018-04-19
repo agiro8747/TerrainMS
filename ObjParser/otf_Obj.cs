@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ObjParser
@@ -30,7 +31,8 @@ namespace ObjParser
          * the parallel solution solvers:
          */
         public ConcurrentBag<FaceDefinition> faces = new ConcurrentBag<FaceDefinition>();
-
+        //using a dictionary to avoid the penalty for resizing an array again and again but 
+        //still be able to index quickly
         public Dictionary<int, Vertex> VertexList { get; private set; }
 
         public Action<Face, otf_Obj, double> OnNewFaceArrived;
@@ -40,6 +42,8 @@ namespace ObjParser
         protected int currentLastVertex = 0;
 
         double treshold = 0;
+
+        private object vertexAddLocker = new object();
 
         public otf_Obj(Action<Face, otf_Obj, double> _onNewFace)
         {
@@ -62,6 +66,13 @@ namespace ObjParser
         private double GetXExtentsofObj(string path)
         {
             double min = 0, max = 0;
+            //reading the vertex data in parallel.
+            //note during this read the faces are not drawn.
+            //that is due to the obj specification.
+            //Parallel.ForEach(File.ReadLines(path), line =>
+            //{
+            //    ProcessLineForVertexData(line, ref min, ref max);
+            //});
             using (var reader = new StreamReader(path))
             {
                 string line;
@@ -82,13 +93,17 @@ namespace ObjParser
                 switch (parts[0])
                 {
                     case "v":
-                        Vertex v = new Vertex();
-                        v.LoadFromStringArray(parts);
-                        if (v.X > max)
-                            max = v.X;
-                        if (v.X < min)
-                            min = v.X;
-                        AddVertex(v);
+                        lock (vertexAddLocker)
+                        {
+                            Vertex v = new Vertex();
+                            v.LoadFromStringArray(parts);
+                            if (v.X > max)
+                                max = v.X;
+                            if (v.X < min)
+                                min = v.X;
+                            AddVertex(v);
+                        }
+                        
                         break;
                 }
             }
@@ -132,7 +147,20 @@ namespace ObjParser
                 }
             }
         }
-
+        /*
+         * da master-worker pattern.
+         * da master just reads in the face lines, literally without processing 
+         * that is, "starts with f - it's a face."
+         * then stores the lines and a new face instance in a concurrent bag
+         * for the workers to munch on.
+         * 
+         * in the meantime the workers take whatever they find in the faces bag
+         * again, execution order is not an issue here - the faces know which vertices
+         * they need in order to form a face.
+         * 
+         * now the speed comes from several workers looking for the vertices of a face 
+         * instead of one.
+         */ 
         public void OnTheFlyProcess(string path, double treshold)
         {
             this.treshold = treshold;
