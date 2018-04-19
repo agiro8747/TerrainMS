@@ -83,7 +83,7 @@ namespace ObjParser
             }
             return max - min;
         }
-
+         
         private void ProcessLineForVertexData(string line, ref double min, ref double max)
         {
             string[] parts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
