@@ -153,7 +153,11 @@ namespace ObjParser
             {
                 workers.Add(new Task(() =>
                 {
-                    ProcessFace(master);
+                    while (faces.Count > 0 || !master.IsCompleted)
+                    {
+                        ProcessFace();
+                    }
+                    
                 }));
             }
 
@@ -170,18 +174,13 @@ namespace ObjParser
                 t.Start();
         }
 
-        private void ProcessFace(Task master)
+        private void ProcessFace()
         {
-            while (faces.Count > 0 || !master.IsCompleted)
-            {
-                FaceDefinition fDef;
-                if (!faces.TryTake(out fDef))
-                    return;
+            if (!faces.TryTake(out FaceDefinition fDef))
+                return;
 
-                fDef.face.LoadFromStringArray(fDef.parts);
-                OnNewFaceArrived?.Invoke(fDef.face, this, treshold);
-            }
-            
+            fDef.face.LoadFromStringArray(fDef.parts);
+            OnNewFaceArrived?.Invoke(fDef.face, this, treshold);        
         }
     }
 
